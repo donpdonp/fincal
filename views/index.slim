@@ -2,12 +2,15 @@ div.navbar.navbar-fixed-top
   div.navbar-inner
     div.container
       ul.nav.nav-tabs
-        li
+        li#menu-calendar
           a onclick="go_calendar()"
             | Calendar
-        li
+        li#menu-table
           a onclick="go_table()"
             | Table
 
 div#calendar
-div#table Table
+div#table
+  form
+    input
+    input type='submit'
