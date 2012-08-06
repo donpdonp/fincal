@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'slim'
+require 'json'
 
 class Npv < Sinatra::Base
   configure do
@@ -9,5 +10,10 @@ class Npv < Sinatra::Base
 
   get '/' do
     slim :index
+  end
+
+  get '/data' do
+    [{:title => "rendered",
+      :start => Time.now.strftime("%Y-%m-%d")}].to_json
   end
 end
