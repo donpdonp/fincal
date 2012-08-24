@@ -22,7 +22,7 @@ class Npv < Sinatra::Base
   end
 
   get '/' do
-    slim :index
+    slim :index, :locals => {:count => Account.count}
   end
 
   post '/' do
