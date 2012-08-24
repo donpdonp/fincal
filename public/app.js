@@ -12,7 +12,7 @@ var Value = Backbone.Model.extend({
 $(document).ready(function() {
   ui_setup();
   go_calendar();
-  $('#calendar').fullCalendar({
+  $('#calendar-view').fullCalendar({
     editable: true,
     events: "/fincal/data"
   })
