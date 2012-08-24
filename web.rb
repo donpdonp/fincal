@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'slim'
 require 'json'
+require 'data_mapper'
 
 class Npv < Sinatra::Base
   configure do
@@ -16,6 +17,10 @@ class Npv < Sinatra::Base
 
   get '/' do
     slim :index
+  end
+
+  post '/' do
+    puts params.inspect
   end
 
   get '/data' do

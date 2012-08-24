@@ -3,22 +3,22 @@ div.navbar.navbar-fixed-top
     div.container
       ul.nav.nav-tabs
         li#menu-calendar
-          a onclick="go_calendar()"
+          a
             | Calendar
         li#menu-table
-          a onclick="go_table()"
+          a
             | Table
 
 div#calendar
 
 div#table
-  form
+  form method='post'
     fieldset
       | Transaction
-      label
-        | Name
-      input
-      label
-        | Amount
-      input
+      label Name
+      input name='name'
+      label Date
+      input name='date'
+      label Amount
+      input name='amount'
     input type='submit'
