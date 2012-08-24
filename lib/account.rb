@@ -3,6 +3,8 @@
 class Account
   include DataMapper::Resource
 
+  property :id,     Serial
+  property :name,   String
   has n, :values
 
   def find_latest_value
