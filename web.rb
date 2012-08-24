@@ -22,16 +22,31 @@ class Npv < Sinatra::Base
   end
 
   get '/' do
-    slim :index, :locals => {:count => Account.count}
+    slim :index, :locals => {:count => Value.count}
   end
 
   post '/' do
     puts params.inspect
+    data = params["value"]
+    value = Value.create(:name => data["name"],
+                         :date => data["date"],
+                         :amount => data["amount"],
+                         :account_id => 1)
+    value.save
+    puts value.inspect
+    redirect web_prefix+"/"
   end
 
   get '/data' do
-    [{:title => "rendered",
-      :start => Time.now.strftime("%Y-%m-%d")}].to_json
+    report = []
+    Value.each do |value|
+      report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
+                 :start => value.date}
+
+    end
+    report << {:title => "rendered",
+               :start => Time.now.strftime("%Y-%m-%d")}
+    report.to_json
   end
 
 end

@@ -4,5 +4,6 @@ class Value
   property :id,     Serial
   property :name,   String
   property :amount, Decimal
+  property :date,   DateTime
 end
 
