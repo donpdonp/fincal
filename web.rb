@@ -8,6 +8,12 @@ class Npv < Sinatra::Base
     set :sessions, true
   end
 
+  helpers do
+    def web_prefix
+      "/fincal"
+    end
+  end
+
   get '/' do
     slim :index
   end
@@ -16,4 +22,5 @@ class Npv < Sinatra::Base
     [{:title => "rendered",
       :start => Time.now.strftime("%Y-%m-%d")}].to_json
   end
+
 end

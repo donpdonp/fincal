@@ -1,13 +1,14 @@
 doctype html
 html
   head
-    link rel='stylesheet' type='text/css' href='/fincal/fullcalendar/fullcalendar.css'
-    link rel='stylesheet' type='text/css' href='/fincal/bootstrap/bootstrap.min.css'
-    link rel='stylesheet' type='text/css' href='/fincal/app.css'
-    script src='/fincal/jquery/jquery-1.7.1.min.js'
-    script src='/fincal/jquery/jquery-ui-1.8.17.custom.min.js'
-    script src='/fincal/fullcalendar/fullcalendar.min.js'
-    script src='/fincal/bootstrap/bootstrap.min.js'
-    script src='/fincal/app.js'
+    link rel='stylesheet' type='text/css' href='#{{web_prefix}}/fullcalendar/fullcalendar.css'
+    link rel='stylesheet' type='text/css' href='#{{web_prefix}}/bootstrap/bootstrap.min.css'
+    link rel='stylesheet' type='text/css' href='#{{web_prefix}}/app.css'
+    script src='#{{web_prefix}}/jquery/jquery-1.7.1.min.js'
+    script src='#{{web_prefix}}/jquery/jquery-ui-1.8.17.custom.min.js'
+    script src='#{{web_prefix}}/fullcalendar/fullcalendar.min.js'
+    script src='#{{web_prefix}}/bootstrap/bootstrap.min.js'
+    script src='#{{web_prefix}}/app.js'
   body
     == yield
+    = "MARK"
