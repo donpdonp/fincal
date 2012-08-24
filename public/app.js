@@ -1,3 +1,9 @@
+var Value = Backbone.Model.extend({
+  set: function(attributes, options) {
+    Backbone.Model.prototype.set.call(this, attributes, options);
+  }
+});
+
 $(document).ready(function() {
   go_calendar();
   $('#calendar').fullCalendar({
