@@ -1,7 +1,9 @@
 #!/usr/bin/ruby
 
-class Account < ActiveRecord::Base
-  has_many :Value
+class Account
+  include DataMapper::Resource
+
+  has n, :values
 
   def find_latest_value
     Value.find_by_account_id(self["id"])

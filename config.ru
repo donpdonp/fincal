@@ -1,3 +1,5 @@
 # config.ru
 require './web'
-run Npv
+map "/fincal" do
+  run Npv
+end

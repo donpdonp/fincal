@@ -3,3 +3,4 @@ gems/
 .bundle/
 
 /Gemfile.lock
+/settings.yml

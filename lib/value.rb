@@ -1,5 +1,8 @@
-#!/usr/bin/ruby
+class Value
+ include DataMapper::Resource
 
-class Value < ActiveRecord::Base
+  property :id,     Serial
+  property :name,   String
+  property :amount, Decimal
 end
 
