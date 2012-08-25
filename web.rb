@@ -26,14 +26,12 @@ class Npv < Sinatra::Base
   end
 
   post '/' do
-    puts params.inspect
     data = params["value"]
     value = Value.create(:name => data["name"],
                          :date => data["date"],
                          :amount => data["amount"],
                          :account_id => 1)
     value.save
-    puts value.inspect
     redirect web_prefix+"/"
   end
 
@@ -43,7 +41,6 @@ class Npv < Sinatra::Base
     calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
     puts "#{calendar_start} #{calendar_end}"
     values = Value.all
-    puts values.inspect
 
     report = []
     first_day_total = Value.sum(:amount, :date.lte => calendar_start)
