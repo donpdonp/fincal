@@ -38,14 +38,28 @@ class Npv < Sinatra::Base
   end
 
   get '/data' do
+    puts params.inspect
+    calendar_start = Date.parse(Time.at(params["start"].to_i).to_s)
+    calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
+    puts "#{calendar_start} #{calendar_end}"
+    values = Value.all
+    puts values.inspect
+
     report = []
-    Value.each do |value|
-      report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
-                 :start => value.date}
+    (calendar_start..calendar_end).each do |day|
+
+      today_values = values.select{|v| v.date.to_date == day}
+      today_total = 0.0
+      today_values.each do |value|
+        report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
+                   :start => value.date}
+        today_total += value.amount
+      end
+      report << {:title => "$#{"%0.2f" % today_total} Day Total",
+                 :start => day}
+
 
     end
-    report << {:title => "rendered",
-               :start => Time.now.strftime("%Y-%m-%d")}
     report.to_json
   end
 
