@@ -46,19 +46,24 @@ class Npv < Sinatra::Base
     puts values.inspect
 
     report = []
+    report_total = 0.0
     (calendar_start..calendar_end).each do |day|
 
+      day_report = []
       today_values = values.select{|v| v.date.to_date == day}
       today_total = 0.0
       today_values.each do |value|
-        report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
+        day_report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
                    :start => value.date}
         today_total += value.amount
       end
-      report << {:title => "$#{"%0.2f" % today_total} Day Total",
+      day_report << {:title => "$#{"%0.2f" % today_total} Day Total",
+                 :start => day}
+      report_total += today_total
+      day_report << {:title => "$#{"%0.2f" % report_total} Balance",
                  :start => day}
 
-
+      report += day_report.reverse
     end
     report.to_json
   end
