@@ -1,13 +1,3 @@
-/* Backbone.js */
-var Journal = Backbone.Collection.extend({
-  model: Value
-});
-
-var Value = Backbone.Model.extend({
-  set: function(attributes, options) {
-    Backbone.Model.prototype.set.call(this, attributes, options);
-  }
-});
 
 $(document).ready(function() {
   ui_setup();
