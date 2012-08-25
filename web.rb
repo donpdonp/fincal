@@ -46,7 +46,9 @@ class Npv < Sinatra::Base
     puts values.inspect
 
     report = []
-    report_total = 0.0
+    first_day_total = Value.sum(:amount, :date.lte => calendar_start)
+    first_day_total = 0 if first_day_total.nil?
+    report_total = first_day_total
     (calendar_start..calendar_end).each do |day|
 
       day_report = []
