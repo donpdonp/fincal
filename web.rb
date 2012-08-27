@@ -54,7 +54,8 @@ class Npv < Sinatra::Base
       today_values.each do |value|
         background_color = value.amount > 0 ? "green" : "darkred"
         day_report << {:title => "$#{"%0.2f" % value.amount} #{value.name}",
-                       :start => value.date, :backgroundColor => background_color}
+                       :start => value.date, :backgroundColor => background_color,
+                       :valueId => "#{value.id}"}
         today_total += value.amount
       end
       day_report << {:title => "$#{"%0.2f" % today_total} Day Total",
