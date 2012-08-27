@@ -27,7 +27,7 @@ function go_table() {
 
 function event_click(e) {
   if (e.valueId) {
-    $('form#detail').attr('action', '/'+e.valueId)
+    $('form#detail').attr('action', '/fincal/'+e.valueId)
     $('div#detail').modal();
   }
 }

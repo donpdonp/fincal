@@ -25,8 +25,11 @@ class Npv < Sinatra::Base
     slim :index, :locals => {:count => Value.count}
   end
 
-  post '/2' do
-    puts "#{params.inspect}"
+  post '/:number' do
+    if params["action"] == "delete"
+      value = Value.get(params["number"])
+      value.destroy if value
+    end
     redirect web_prefix+"/"
   end
 
