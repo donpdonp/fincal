@@ -25,6 +25,11 @@ class Npv < Sinatra::Base
     slim :index, :locals => {:count => Value.count}
   end
 
+  post '/2' do
+    puts "#{params.inspect}"
+    redirect web_prefix+"/"
+  end
+
   post '/' do
     data = params["value"]
     value = Value.create(:name => data["name"],

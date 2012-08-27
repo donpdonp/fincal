@@ -27,7 +27,7 @@ function go_table() {
 
 function event_click(e) {
   if (e.valueId) {
-    $('input#value_id').attr('value', e.valueId)
+    $('form#detail').attr('action', '/'+e.valueId)
     $('div#detail').modal();
   }
 }

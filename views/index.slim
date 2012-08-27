@@ -28,9 +28,9 @@ div#table.modal.hide.fade
 
 div#detail.modal.hide.fade
   div.modal-body
-    form method='post'
+    form#detail method='post'
       input name='action' type='hidden' value='delete'
       fieldset
         | Transaction
         input id='value_id' name='value[id]' type='hidden'
-      input type='submit' name='delete'
+      input type='submit' value='delete'
