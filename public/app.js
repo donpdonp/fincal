@@ -26,5 +26,8 @@ function go_table() {
 }
 
 function event_click(e) {
-  console.log(e);
+  if (e.valueId) {
+    $('input#value_id').attr('value', e.valueId)
+    $('div#detail').modal();
+  }
 }
