@@ -7,21 +7,22 @@ div.navbar
             | Calendar
         li#menu-table
           a
-            | Table
+            | Add
 
 div#calendar
   | Count #{count}
   div#calendar-view
 
-div#table
-  form method='post'
-    fieldset
-      | Transaction
-      label Name
-      input name='value[name]'
-      label Date
-      input name='value[date]'
-      label Amount
-      input name='value[amount]'
-    input type='submit'
+div#table.modal.hide.fade
+  div.modal-body
+    form method='post'
+      fieldset
+        | Transaction
+        label Name
+        input name='value[name]'
+        label Date
+        input name='value[date]'
+        label Amount
+        input name='value[amount]'
+      input type='submit'
 
