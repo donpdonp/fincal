@@ -1,6 +1,8 @@
 bin/
 gems/
 .bundle/
+log/
+tmp/
 
 /Gemfile.lock
 /settings.yml
