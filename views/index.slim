@@ -21,15 +21,18 @@ div#table.modal.hide.fade
         label Name
         input name='value[name]'
         label Date
-        input name='value[date]'
+        input#date name='value[date]'
         label Amount
+        | $
         input name='value[amount]'
       input type='submit'
 
 div#detail.modal.hide.fade
   div.modal-body
+    div Value
+    div#name
+    div#date
+
     form#detail method='post'
       input name='action' type='hidden' value='delete'
-      fieldset
-        | Transaction
       input type='submit' value='delete'
