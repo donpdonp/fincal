@@ -5,7 +5,8 @@ $(document).ready(function() {
   $('#calendar-view').fullCalendar({
     editable: true,
     events: "/fincal/data",
-    eventClick: event_click
+    eventClick: event_click,
+    dayClick: day_click
   })
 })
 
@@ -19,10 +20,10 @@ function go_calendar() {
   $('#menu-table').removeClass('active')
 }
 
-function go_table() {
+function go_table(date) {
   $('#menu-table').addClass('active')
   $('#menu-calendar').removeClass('active')
-  var now = new XDate();
+  var now = new XDate(date);
   $('div#table input#date').attr('value', now.toString("yyyy-MM-dd"));
   $('div#table').modal();
 }
@@ -35,4 +36,8 @@ function event_click(e) {
     $('div#detail div#date').html(e.start)
     $('div#detail').modal();
   }
+}
+
+function day_click(e) {
+  go_table(e)
 }
