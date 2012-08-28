@@ -52,12 +52,14 @@ class Npv < Sinatra::Base
     calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
     puts "data range #{calendar_start} #{calendar_end}"
     values = Value.all
+    puts "values size #{size}"
 
     report = []
     first_day_total = Value.sum(:amount, :date.lte => calendar_start)
     first_day_total = 0 if first_day_total.nil?
     report_total = first_day_total
     (calendar_start..calendar_end).each do |day|
+      puts "day report for #{day}"
 
       day_report = []
       today_values = values.select{|v| v.date.to_date == day}
@@ -75,6 +77,7 @@ class Npv < Sinatra::Base
       day_report << {:title => "$#{"%0.2f" % report_total} Balance",
                      :start => day, :editable => false}
 
+      puts "adding day report to report"
       report += day_report.reverse
     end
     puts "data report is size #{report.size}"
