@@ -55,8 +55,7 @@ class Npv < Sinatra::Base
     puts "values size #{values.size}"
 
     report = []
-    first_day_total = Value.sum(:amount, :date.lte => calendar_start)
-    first_day_total = 0 if first_day_total.nil?
+    first_day_total = Value.sum(:amount, :date.lte => calendar_start) || 0
     report_total = first_day_total
     (calendar_start..calendar_end).each do |day|
       puts "day report for #{day}"
