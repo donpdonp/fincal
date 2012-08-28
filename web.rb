@@ -52,7 +52,7 @@ class Npv < Sinatra::Base
     calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
     puts "data range #{calendar_start} #{calendar_end}"
     values = Value.all
-    puts "values size #{size}"
+    puts "values size #{values.size}"
 
     report = []
     first_day_total = Value.sum(:amount, :date.lte => calendar_start)
