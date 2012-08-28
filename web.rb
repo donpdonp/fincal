@@ -22,10 +22,12 @@ class Npv < Sinatra::Base
   end
 
   get '/' do
+    puts "/ #{params.inspect}"
     slim :index, :locals => {:count => Value.count}
   end
 
   post '/:number' do
+    puts "post /:number #{params.inspect}"
     if params["action"] == "delete"
       value = Value.get(params["number"])
       value.destroy if value
@@ -34,6 +36,7 @@ class Npv < Sinatra::Base
   end
 
   post '/' do
+    puts "post / #{params.inspect}"
     data = params["value"]
     value = Value.create(:name => data["name"],
                          :date => data["date"],
@@ -44,7 +47,7 @@ class Npv < Sinatra::Base
   end
 
   get '/data' do
-    puts params.inspect
+    puts "/data #{params.inspect}"
     calendar_start = Date.parse(Time.at(params["start"].to_i).to_s)
     calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
     puts "data range #{calendar_start} #{calendar_end}"
