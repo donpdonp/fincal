@@ -1,14 +1,13 @@
 require 'sinatra/base'
 require 'slim'
 require 'json'
-require 'data_mapper'
+require 'active_record'
 Dir['lib/*'].each{|rb| require_relative rb[0,rb.length-3]}
 
 class Npv < Sinatra::Base
 
   SETTINGS=YAML.load(File.open("settings.yml"))
-  DataMapper.setup(:default, SETTINGS["db"])
-  DataMapper.auto_upgrade!
+  ActiveRecord::Base.establish_connection(YAML.load_file("database.yml"))
 
   configure do
     set :slim, :pretty => true
@@ -29,7 +28,7 @@ class Npv < Sinatra::Base
   post '/:number' do
     puts "post /:number #{params.inspect}"
     if params["action"] == "delete"
-      value = Value.get(params["number"])
+      value = Value.find(params["number"])
       value.destroy if value
     end
     redirect web_prefix+"/"
@@ -55,7 +54,7 @@ class Npv < Sinatra::Base
     puts "values size #{values.size}"
 
     report = []
-    first_day_total = Value.sum(:amount, :date.lte => calendar_start) || 0
+    first_day_total = Value.where(["date < ?", calendar_start]).sum(:amount)
     report_total = first_day_total
     (calendar_start..calendar_end).each do |day|
       puts "day report for #{day}"
