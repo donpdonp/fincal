@@ -47,7 +47,7 @@ class Npv < Sinatra::Base
     puts params.inspect
     calendar_start = Date.parse(Time.at(params["start"].to_i).to_s)
     calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
-    puts "#{calendar_start} #{calendar_end}"
+    puts "data range #{calendar_start} #{calendar_end}"
     values = Value.all
 
     report = []
@@ -74,6 +74,7 @@ class Npv < Sinatra::Base
 
       report += day_report.reverse
     end
+    puts "data report is size #{report.size}"
     report.to_json
   end
 
