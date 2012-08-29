@@ -6,3 +6,4 @@ tmp/
 
 /Gemfile.lock
 /settings.yml
+/database.yml
