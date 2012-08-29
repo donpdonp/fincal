@@ -32,8 +32,8 @@ function event_click(e) {
   if (e.valueId) {
     console.log(e)
     $('form#detail').attr('action', '/fincal/'+e.valueId)
-    $('div#detail div#name').html(e.title)
-    $('div#detail div#date').html(e.start)
+    $('div#detail div#name').text(e.title)
+    $('div#detail div#date').text(e.start)
     $('div#detail').modal();
   }
 }
