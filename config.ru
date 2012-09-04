@@ -8,4 +8,6 @@ use Rack::Coffee, {
     :urls => '/js'
   }
 
-run Npv
+map '/fincal' do
+  run Npv
+end
