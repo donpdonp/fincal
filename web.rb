@@ -22,8 +22,7 @@ class Npv < Sinatra::Base
 
   get '/' do
     puts "/ #{params.inspect}"
-    puts @env['rack.session']
-    puts request.cookies.inspect
+    session["id"] ||= rand(36**6).to_s(36)
     slim :index, :locals => {:count => Value.count}
   end
 

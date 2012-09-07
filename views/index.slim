@@ -8,6 +8,7 @@ div.navbar
         li#menu-table
           a
             | Add
+      a href="/fincal/s/#{session["id"]}" Bookmark #{session["id"]}
 
 div#calendar
   | Count #{count} Session Id: #{session["session_id"]} Id: #{session["id"]}
