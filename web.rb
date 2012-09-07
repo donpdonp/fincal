@@ -22,7 +22,14 @@ class Npv < Sinatra::Base
 
   get '/' do
     puts "/ #{params.inspect}"
+    puts @env['rack.session']
     slim :index, :locals => {:count => Value.count}
+  end
+
+  get '/s/:number' do
+    puts "setting id to #{params["number"]}"
+    session["id"] = params["number"]
+    puts session.inspect
   end
 
   post '/:number' do
@@ -47,19 +54,22 @@ class Npv < Sinatra::Base
 
   get '/data' do
     puts "/data #{params.inspect}"
-    calendar_start = Date.parse(Time.at(params["start"].to_i).to_s)
-    calendar_end = Date.parse(Time.at(params["end"].to_i).to_s)
-    puts "data range #{calendar_start} #{calendar_end}"
-    values = Value.all
-    puts "Values.all count #{values.size}"
+    day_start = Date.parse(Time.at(params["start"].to_i).to_s)
+    day_end = Date.parse(Time.at(params["end"].to_i).to_s)
+    puts "data range #{day_start} #{day_end}"
+    report = build_calendar_report(day_start, day_end)
+    report.flatten.to_json
+  end
 
-    report = []
-    first_day_total = Value.where(["date < ?", calendar_start]).sum(:amount)
-    report_total = first_day_total
-    (calendar_start..calendar_end).each do |day|
+  private
+
+  def build_calendar_report(day_start, day_end)
+    previous_days_total = Value.where(["date < ?", day_start]).sum(:amount)
+    report_total = previous_days_total
+    (day_start..day_end).map do |day|
 
       day_report = []
-      today_values = values.select{|v| v.date.to_date == day}
+      today_values = Value.where({date:day})
       today_total = 0.0
       today_values.each do |value|
         background_color = value.amount > 0 ? "green" : "darkred"
@@ -74,9 +84,8 @@ class Npv < Sinatra::Base
       day_report << {:title => "$#{"%0.2f" % report_total} Balance",
                      :start => day, :editable => false}
 
-      report += day_report.reverse
+      day_report.reverse
     end
-    report.to_json
   end
 
 end
