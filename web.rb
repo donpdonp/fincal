@@ -23,7 +23,7 @@ class Npv < Sinatra::Base
   get '/' do
     puts "/ #{params.inspect}"
     session["id"] ||= rand(36**6).to_s(36)
-    slim :index, :locals => {:count => Value.count}
+    slim :index, :locals => {}
   end
 
   get '/s/:number' do
@@ -36,7 +36,7 @@ class Npv < Sinatra::Base
   post '/:number' do
     puts "post /:number #{params.inspect}"
     if params["action"] == "delete"
-      value = Value.find(params["number"])
+      value = value_session_query.find(params["number"])
       value.destroy if value
     end
     redirect web_prefix+"/"
@@ -45,7 +45,7 @@ class Npv < Sinatra::Base
   post '/' do
     puts "post / #{params.inspect}"
     data = params["value"]
-    value = Value.create!(:name => data["name"],
+    value = value_session_query.create!(:name => data["name"],
                          :date => data["date"],
                          :amount => data["amount"],
                          :session_id => session["id"])
@@ -63,13 +63,17 @@ class Npv < Sinatra::Base
 
   private
 
+  def value_session_query
+    Value.where({session_id:session["id"]})
+  end
+
   def build_calendar_report(day_start, day_end)
-    previous_days_total = Value.where(["date < ?", day_start]).sum(:amount)
+    previous_days_total = value_session_query.where(["date < ?", day_start]).sum(:amount)
     report_total = previous_days_total
     (day_start..day_end).map do |day|
 
       day_report = []
-      today_values = Value.where({date:day})
+      today_values = value_session_query.where({date:day})
       today_total = 0.0
       today_values.each do |value|
         background_color = value.amount > 0 ? "green" : "darkred"
