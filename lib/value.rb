@@ -1,4 +1,4 @@
 class Value < ActiveRecord::Base
-  validates :amount, :presence => true
+  validates :amount, :session_id, :presence => true
 end
 

@@ -23,13 +23,15 @@ class Npv < Sinatra::Base
   get '/' do
     puts "/ #{params.inspect}"
     puts @env['rack.session']
+    puts request.cookies.inspect
     slim :index, :locals => {:count => Value.count}
   end
 
   get '/s/:number' do
-    puts "setting id to #{params["number"]}"
+    puts "/s/#{params["number"]}"
     session["id"] = params["number"]
     puts session.inspect
+    redirect web_prefix+"/"
   end
 
   post '/:number' do
@@ -44,11 +46,10 @@ class Npv < Sinatra::Base
   post '/' do
     puts "post / #{params.inspect}"
     data = params["value"]
-    value = Value.create(:name => data["name"],
+    value = Value.create!(:name => data["name"],
                          :date => data["date"],
                          :amount => data["amount"],
-                         :account_id => 1)
-    value.save
+                         :session_id => session["id"])
     redirect web_prefix+"/"
   end
 
