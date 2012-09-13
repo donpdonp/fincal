@@ -13,4 +13,12 @@ html lang="en"
     title Financial Calendar
   body
     div.container-fluid
+      div.navbar
+        div.navbar-inner
+          a.brand
+            | Financial Calendar
+          ul.nav
+          a.info href="#{web_prefix}/s/#{session["id"]}" title="Bookmark this link to find your calendar later!"
+            | Bookmark #{session["id"]}
+
       == yield
