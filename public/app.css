@@ -1,8 +1,10 @@
 body {
 }
 
-#calendar,#table {
+#calendar-view {
   width: 900px;
   margin: 0 auto;
+  font-size: 13px;
+  line-height: 18px;
 }
 

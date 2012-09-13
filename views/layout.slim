@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="en"
   head
     link rel='stylesheet' type='text/css' href='#{{web_prefix}}/fullcalendar/fullcalendar.css'
     link rel='stylesheet' type='text/css' href='#{{web_prefix}}/bootstrap/bootstrap.min.css'
@@ -10,6 +10,7 @@ html
     script src='#{{web_prefix}}/bootstrap/bootstrap.min.js'
     script src='#{{web_prefix}}/js/xdate.js'
     script src='#{{web_prefix}}/js/app.js'
-  title Financial Calendar
+    title Financial Calendar
   body
-    == yield
+    div.container-fluid
+      == yield
