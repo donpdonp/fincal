@@ -9,13 +9,13 @@ class Npv < Sinatra::Base
   SETTINGS=YAML.load(File.open("settings.yml"))
 
   configure do
+    db_creds = YAML.load_file("database.yml")
     appfog_creds = ENV['VCAP_SERVICES']
     if appfog_creds
-      appfog_creds = JSON.parse(appfog_creds)
-      psql_dbs = appfog_creds.map{|k,v| v.select{|e| e["tags"].include?('postgresql')}}
-      db_creds = psql_dbs.first.first["credentials"].merge({"database" => "fincal", "adapter" => "postgresql"})
-    else
-      db_creds = YAML.load_file("database.yml")
+      appfog_creds = JSON.parse(appfog_creds).map{|k,v| v}.flatten
+      puts appfog_creds.inspect
+      dbs = appfog_creds.select{|e| e["tags"].include?(db_creds["adapter"])}
+      db_creds.merge!(dbs.first["credentials"])
     end
     ActiveRecord::Base.establish_connection(db_creds)
     set :slim, :pretty => true
