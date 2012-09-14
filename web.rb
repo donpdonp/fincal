@@ -7,9 +7,17 @@ Dir['lib/*'].each{|rb| require_relative rb[0,rb.length-3]}
 class Npv < Sinatra::Base
 
   SETTINGS=YAML.load(File.open("settings.yml"))
-  ActiveRecord::Base.establish_connection(YAML.load_file("database.yml"))
 
   configure do
+    appfog_creds = ENV['VCAP_SERVICES']
+    if appfog_creds
+      appfog_creds = JSON.parse(appfog_creds)
+      psql_dbs = appfog_creds.map{|k,v| v.select{|e| e["tags"].include?('postgresql')}}
+      db_creds = psql_dbs.first.first["credentials"].merge({"database" => "fincal", "adapter" => "postgresql"})
+    else
+      db_creds = YAML.load_file("database.yml")
+    end
+    ActiveRecord::Base.establish_connection(db_creds)
     set :slim, :pretty => true
     set :sessions, true
   end
