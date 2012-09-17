@@ -18,6 +18,7 @@ class Npv < Sinatra::Base
       db_creds.merge!(dbs.first["credentials"])
     end
     ActiveRecord::Base.establish_connection(db_creds)
+    ActiveRecord::Migrator.migrate('db/migrate')
     set :slim, :pretty => true
     set :sessions, true
   end
