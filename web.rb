@@ -24,7 +24,7 @@ class Npv < Sinatra::Base
 
   helpers do
     def web_prefix
-      "/fincal"
+      ""
     end
   end
 

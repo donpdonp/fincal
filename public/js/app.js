@@ -1,18 +1,13 @@
-
-$(document).ready(function() {
-  ui_setup();
+function ui_setup(prefix) {
+  $('li#menu-calendar').click(go_calendar)
+  $('li#menu-table').click(go_table)
   go_calendar();
   $('#calendar-view').fullCalendar({
     editable: true,
-    events: "/fincal/data",
+    events: prefix+"/data",
     eventClick: event_click,
     dayClick: day_click
   })
-})
-
-function ui_setup() {
-  $('li#menu-calendar').click(go_calendar)
-  $('li#menu-table').click(go_table)
 }
 
 function go_calendar() {

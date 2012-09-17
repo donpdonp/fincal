@@ -12,6 +12,9 @@ html lang="en"
     script src='#{{web_prefix}}/js/app.js'
     title Financial Calendar
   body
+    javascript:
+      $(document).ready(function(){ui_setup(#{{web_prefix.to_json}})})
+
     div.container-fluid
       div.navbar
         div.navbar-inner
