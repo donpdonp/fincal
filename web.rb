@@ -70,6 +70,10 @@ class Npv < Sinatra::Base
     report.flatten.to_json
   end
 
+  get '/stats' do
+    slim :stats
+  end
+
   private
 
   def value_session_query
