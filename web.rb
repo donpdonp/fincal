@@ -27,6 +27,17 @@ class Npv < Sinatra::Base
     def web_prefix
       ""
     end
+
+    def adsense_setup
+      if SETTINGS["adsense"]
+        "
+        google_ad_client = \"#{SETTINGS["adsense"]["client"]}\";
+        google_ad_slot = \"#{SETTINGS["adsense"]["slot"]}\";
+        google_ad_width = \"#{SETTINGS["adsense"]["width"]}\";
+        google_ad_height = \"#{SETTINGS["adsense"]["height"]}\";
+        "
+      end
+    end
   end
 
   get '/' do
