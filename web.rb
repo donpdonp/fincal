@@ -81,8 +81,12 @@ class Npv < Sinatra::Base
     report.flatten.to_json
   end
 
-  get '/stats' do
-    slim :stats
+  get '/stats.?:format?' do
+    if params[:format] == 'json'
+      JSON.pretty_generate({values: {count: Value.count}})
+    else
+      slim :stats
+    end
   end
 
   private
