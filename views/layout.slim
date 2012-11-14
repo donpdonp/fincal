@@ -19,13 +19,13 @@ html lang="en"
     div.container-fluid
       div.navbar
         div.navbar-inner
+          div.adsense
+            script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"
           a.brand
             | Financial Calendar
           ul.nav
           a.info href="#{web_prefix}/s/#{session["id"]}" title="Bookmark this link to find your calendar later!"
             | Bookmark #{session["id"]}
 
-      div.adsense
-        script src="http://pagead2.googlesyndication.com/pagead/show_ads.js"
 
       == yield

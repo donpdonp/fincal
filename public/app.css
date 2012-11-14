@@ -16,4 +16,6 @@ body {
 .adsense {
   margin: 0 auto;
   text-align: center;
+  float: right;
+  margin-top: 0.7em;
 }
