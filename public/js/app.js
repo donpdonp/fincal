@@ -16,7 +16,7 @@ function add_validate(event) {
   var value_input = form['value[amount]']
   var value = parseInt(value_input.value)
 
-  value_valid = value > 0
+  value_valid = value != 0
   if(!value_valid) {
     value_control.addClass('error')
     value_input.focus()
