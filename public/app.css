@@ -19,3 +19,11 @@ body {
   float: right;
   margin-top: 0.7em;
 }
+
+#add-transaction fieldset {
+  margin: 1em;
+}
+
+span#add-transaction-title {
+  font-weight: bold;
+}

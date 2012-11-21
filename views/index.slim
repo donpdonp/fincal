@@ -1,19 +1,19 @@
 div#calendar
   div#calendar-view
 
-div#table.modal.hide.fade
+div#add-transaction.modal.hide.fade
   div.modal-body
     form method='post'
+      span#add-transaction-title Add Transaction
       fieldset
-        | Transaction
-        label Name
+        label Title
         input name='value[name]'
         label Date
         input#date type='date' name='value[date]'
         label Amount
         | $
         input name='value[amount]'
-      input type='submit'
+      input type='submit' value='Finished'
 
 div#detail.modal.hide.fade
   div.modal-body
