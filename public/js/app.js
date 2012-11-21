@@ -5,11 +5,24 @@ function ui_setup(prefix) {
     eventClick: event_click,
     dayClick: day_click
   })
-  $('div.add-transaction form').submit(add_validate)
+  $('div#add-transaction form').submit(add_validate)
 }
 
-function add_validate() {
-  console.log("add validate")
+function add_validate(event) {
+  var form = event.target
+
+  var value_control = $('div#add-transaction div.control-group#amount')
+  var value_help = $('div#add-transaction div.control-group#amount span.help-inline')
+  var value_input = form['value[amount]']
+  var value = parseInt(value_input.value)
+
+  value_valid = value > 0
+  if(!value_valid) {
+    value_control.addClass('error')
+    value_input.focus()
+  }
+
+  return value_valid
 }
 
 function modal_add_transaction(date) {
