@@ -24,6 +24,14 @@ body {
   margin: 1em;
 }
 
+#add-transaction label.control-label {
+  width: 80px;
+}
+#add-transaction div.controls {
+  margin-left: 90px;
+}
+
+
 span#add-transaction-title {
   font-weight: bold;
 }

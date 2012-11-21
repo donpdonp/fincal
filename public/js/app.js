@@ -16,9 +16,9 @@ function modal_add_transaction(date) {
 }
 
 function modal_delete(record) {
-  $('form#detail').attr('action', e.valueId)
-  $('div#detail div#name').text(e.title)
-  $('div#detail div#date').text(e.start)
+  $('form#detail').attr('action', record.valueId)
+  $('div#detail div#name').text(record.title)
+  $('div#detail div#date').text(record.start)
   $('div#detail').modal();
 }
 
