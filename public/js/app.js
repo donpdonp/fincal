@@ -5,11 +5,14 @@ function ui_setup(prefix) {
     eventClick: event_click,
     dayClick: day_click
   })
+  $('div.add-transaction form').submit(add_validate)
+}
+
+function add_validate() {
+  console.log("add validate")
 }
 
 function modal_add_transaction(date) {
-  $('#menu-table').addClass('active')
-  $('#menu-calendar').removeClass('active')
   var now = new XDate(date);
   $('div#add-transaction input#date').attr('value', now.toString("yyyy-MM-dd"));
   $('div#add-transaction').modal();
