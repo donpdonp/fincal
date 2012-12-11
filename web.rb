@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'slim'
 require 'json'
 require 'active_record'
-Dir['lib/*'].each{|rb| require_relative rb[0,rb.length-3]}
+Dir['lib/*.rb'].each{|rb| require_relative rb[0,rb.length-3]}
 
 class Npv < Sinatra::Base
 
@@ -20,7 +20,7 @@ class Npv < Sinatra::Base
     ActiveRecord::Base.establish_connection(db_creds)
     ActiveRecord::Migrator.migrate('db/migrate')
     set :slim, :pretty => true
-    set :sessions, true
+    set :sessions, :expire_after => 15552000 #6 months
   end
 
   helpers do
