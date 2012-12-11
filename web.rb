@@ -68,7 +68,8 @@ class Npv < Sinatra::Base
     value = value_session_query.create!(:name => data["name"],
                          :date => data["date"],
                          :amount => data["amount"],
-                         :session_id => session["id"])
+                         :session_id => session["id"],
+                         :created_at => Time.now)
     redirect web_prefix+"/"
   end
 
@@ -83,7 +84,9 @@ class Npv < Sinatra::Base
 
   get '/stats.?:format?' do
     if params[:format] == 'json'
-      JSON.pretty_generate({values: {count: Value.count}})
+      JSON.pretty_generate({values: {count: Value.count,
+                                     day_change: Value.where(['created_at > ?', Time.now-(60*60*24)])
+                                      .count}})
     else
       slim :stats
     end
