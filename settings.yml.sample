@@ -1,0 +1,9 @@
+---
+db: "postgres://user:pass@127.0.0.1/fincal"
+persona_base_url: "http://localhost:9393"
+session_secret: "secret"
+adsense:
+  client: "ca-pub-XXXXXXXXXX"
+  slot: "YYYYYYYY"
+  width: 468
+  height: 15
