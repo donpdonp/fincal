@@ -12,6 +12,12 @@ div#add-transaction.modal.hide.fade
             span.add-on
               i.icon-font
             input type='text' name='value[name]'
+      div.control-group#amount
+        label.control-label Amount
+        div.controls
+          div.input-prepend
+            span.add-on $
+            input type='number' name='value[amount]'
       div.control-group
         label.control-label Date
         div.controls
@@ -19,12 +25,6 @@ div#add-transaction.modal.hide.fade
             span.add-on
               i.icon-calendar
             input#date type='date' name='value[date]'
-      div.control-group#amount
-        label.control-label Amount
-        div.controls
-          div.input-prepend
-            span.add-on $
-            input type='number' name='value[amount]'
       input type='submit' value='Finished'
 
 div#detail.modal.hide.fade
