@@ -20,7 +20,9 @@ class Npv < Sinatra::Base
     ActiveRecord::Base.establish_connection(db_creds)
     ActiveRecord::Migrator.migrate('db/migrate')
     set :slim, :pretty => true
-    use Rack::Session::Cookie, :expire_after => 15552000 #6 months
+    use Rack::Session::Cookie,
+             :expire_after => 15552000, #6 months
+             :secret => SETTINGS['session_secret']
   end
 
   helpers do
