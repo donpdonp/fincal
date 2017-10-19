@@ -1,4 +1,4 @@
-class Setup < ActiveRecord::Migration
+class Setup < ActiveRecord::Migration[5.1]
   def self.up
     create_table :values do |t|
       t.column :name, :string, :null => false

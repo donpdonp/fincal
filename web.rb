@@ -6,6 +6,7 @@ Dir['lib/*.rb'].each{|rb| require_relative rb[0,rb.length-3]}
 
 class Npv < Sinatra::Base
 
+  set :public_folder, File.dirname(__FILE__) + '/public'
   SETTINGS=YAML.load(File.open("settings.yml"))
 
   configure do
@@ -27,7 +28,7 @@ class Npv < Sinatra::Base
 
   helpers do
     def web_prefix
-      ""
+      SETTINGS['root_url']
     end
 
     def adsense_setup
